@@ -69,3 +69,7 @@ input ProgrammerInput {
 type Mutation {
   addProgrammer(input: ProgrammerInput!): Programmer
 }
+
+type Subscription {
+  programmerAdded: Programmer
+}
