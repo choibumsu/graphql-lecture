@@ -1,9 +1,9 @@
 import { PubSub } from "apollo-server";
 import * as data from "./db.json";
 
+const pubsub = new PubSub();
 const programmers = data.programmers;
 const friendships = data.friendships;
-const pubsub = new PubSub();
 
 const categoryTypeCheck = (obj) => {
   if (obj.database !== undefined) {
@@ -46,7 +46,15 @@ const getProgrammers = (id = -1) => {
 
   if (resultProgrammers.length === 0) return;
 
-  return id === -1 ? resultProgrammers : resultProgrammers[0];
+  if (id === -1) {
+    return resultProgrammers;
+  } else {
+    pubsub.publish("programmerLoaded", {
+      programmerLoaded: resultProgrammers[0],
+    });
+
+    return resultProgrammers[0];
+  }
 };
 
 const addProgrammer = (input) => {
@@ -104,6 +112,9 @@ const resolvers = {
   Subscription: {
     programmerAdded: {
       subscribe: () => pubsub.asyncIterator("programmerAdded"),
+    },
+    programmerLoaded: {
+      subscribe: () => pubsub.asyncIterator("programmerLoaded"),
     },
   },
 };
