@@ -48,7 +48,7 @@ type Programmer {
 
 type Query {
   programmers: [Programmer]!
-  programmer(id: Int!): Programmer
+  programmer(id: Int!): Programmer!
 }
 
 # Input Type

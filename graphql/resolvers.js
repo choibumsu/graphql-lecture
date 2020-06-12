@@ -3,8 +3,13 @@ import * as data from "./db.json";
 const programmers = data.programmers;
 const friendships = data.friendships;
 
-const getProgrammers = () => {
-  return programmers.map((programmer) => {
+const getProgrammers = (id = -1) => {
+  const selectedProgrammers =
+    id === -1
+      ? programmers
+      : programmers.filter((programmer) => programmer.id === id);
+
+  const resultProgrammers = selectedProgrammers.map((programmer) => {
     programmer.friends = friendships.reduce((friendsList, friendship) => {
       if (
         programmer.id === friendship.friend_a ||
@@ -26,6 +31,10 @@ const getProgrammers = () => {
 
     return programmer;
   });
+
+  if (resultProgrammers.length === 0) return;
+
+  return id === -1 ? resultProgrammers : resultProgrammers[0];
 };
 
 const resolvers = {
@@ -42,7 +51,7 @@ const resolvers = {
   },
   Query: {
     programmers: () => getProgrammers(),
-    programmer: (_, { id }) => data,
+    programmer: (_, { id }) => getProgrammers(id),
   },
   Mutation: {
     addProgrammer: (_, { input }) => {
