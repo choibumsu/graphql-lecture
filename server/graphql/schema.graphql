@@ -71,5 +71,6 @@ type Mutation {
 }
 
 type Subscription {
-  programmerAdded: Programmer
+  programmerAdded: Programmer!
+  programmerLoaded: Programmer!
 }
