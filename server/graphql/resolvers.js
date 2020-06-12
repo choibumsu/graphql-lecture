@@ -1,7 +1,9 @@
+import { PubSub } from "apollo-server";
 import * as data from "./db.json";
 
 const programmers = data.programmers;
 const friendships = data.friendships;
+const pubsub = new PubSub();
 
 const categoryTypeCheck = (obj) => {
   if (obj.database !== undefined) {
@@ -82,6 +84,9 @@ const addProgrammer = (input) => {
   }
 
   programmers.push(newProgrammer);
+  pubsub.publish("programmerAdded", {
+    programmerAdded: newProgrammer,
+  });
   return newProgrammer;
 };
 
@@ -95,6 +100,11 @@ const resolvers = {
   },
   Mutation: {
     addProgrammer: (_, { input }) => addProgrammer(input),
+  },
+  Subscription: {
+    programmerAdded: {
+      subscribe: () => pubsub.asyncIterator("programmerAdded"),
+    },
   },
 };
 
