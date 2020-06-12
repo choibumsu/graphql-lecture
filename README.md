@@ -80,7 +80,7 @@ mutation addProgrammer($input: ProgrammerInput!) {
 }
 ```
 
-Add Query Variables By Playground (left-bottom)
+**Add Query Variables** By Playground (left-bottom)
 
 ```json
 {

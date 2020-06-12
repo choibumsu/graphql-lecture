@@ -3,6 +3,16 @@ import * as data from "./db.json";
 const programmers = data.programmers;
 const friendships = data.friendships;
 
+const categoryTypeCheck = (obj) => {
+  if (obj.database !== undefined) {
+    return "Backend";
+  } else if (obj.native !== undefined) {
+    return "Frontend";
+  } else {
+    return null;
+  }
+};
+
 const getProgrammers = (id = -1) => {
   const selectedProgrammers =
     id === -1
@@ -37,60 +47,54 @@ const getProgrammers = (id = -1) => {
   return id === -1 ? resultProgrammers : resultProgrammers[0];
 };
 
+const addProgrammer = (input) => {
+  const newProgrammer = {
+    id: programmers.length + 1,
+    name: input.name,
+    gender: input.gender,
+    grades: input.grades,
+    address: {
+      location: input.addressLocation,
+      detail: input.addressDetail ? input.addressDetail : "",
+    },
+    category: {
+      frameworks: input.frameworks,
+    },
+    friendship_ids: [],
+  };
+
+  input.friends.forEach((friendId) => {
+    newProgrammer.friendship_ids.push(friendships.length + 1);
+    friendships.push({
+      id: friendships.length + 1,
+      friend_a: programmers.length + 1,
+      friend_b: friendId,
+      metYear: new Date().getFullYear(),
+    });
+  });
+
+  if (input.category === "Frontend") {
+    newProgrammer.category.native = input.native ? input.native : false;
+  } else if (input.category === "Backend") {
+    newProgrammer.category.database = input.database ? input.database : [];
+  } else {
+    return;
+  }
+
+  programmers.push(newProgrammer);
+  return newProgrammer;
+};
+
 const resolvers = {
   Category: {
-    __resolveType(obj, context, info) {
-      if (obj.database !== undefined) {
-        return "Backend";
-      } else if (obj.native !== undefined) {
-        return "Frontend";
-      } else {
-        return null;
-      }
-    },
+    __resolveType: (obj, context, info) => categoryTypeCheck(obj),
   },
   Query: {
     programmers: () => getProgrammers(),
     programmer: (_, { id }) => getProgrammers(id),
   },
   Mutation: {
-    addProgrammer: (_, { input }) => {
-      const newProgrammer = {
-        id: programmers.length + 1,
-        name: input.name,
-        gender: input.gender,
-        grades: input.grades,
-        address: {
-          location: input.addressLocation,
-          detail: input.addressDetail ? input.addressDetail : "",
-        },
-        category: {
-          frameworks: input.frameworks,
-        },
-        friendship_ids: [],
-      };
-
-      input.friends.forEach((friendId) => {
-        newProgrammer.friendship_ids.push(friendships.length + 1);
-        friendships.push({
-          id: friendships.length + 1,
-          friend_a: programmers.length + 1,
-          friend_b: friendId,
-          metYear: new Date().getFullYear(),
-        });
-      });
-
-      if (input.category === "Frontend") {
-        newProgrammer.category.native = input.native ? input.native : false;
-      } else if (input.category === "Backend") {
-        newProgrammer.category.database = input.database ? input.database : [];
-      } else {
-        return;
-      }
-
-      programmers.push(newProgrammer);
-      return newProgrammer;
-    },
+    addProgrammer: (_, { input }) => addProgrammer(input),
   },
 };
 
