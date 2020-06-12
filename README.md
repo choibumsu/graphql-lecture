@@ -5,7 +5,7 @@
 ```bash
 git clone https://github.com/choibumsu/graphql-lecture.git
 
-cd graphql-lecture
+cd graphql-lecture/server
 
 npm install
 
