@@ -47,13 +47,27 @@ type Programmer {
 }
 
 type Query {
+  """
+  모든 프로그래머 로드
+  """
   programmers: [Programmer]!
+
+  """
+  특정 ID의 프로그래머 로드
+  """
   programmer(id: Int!): Programmer!
 }
 
 # Input Type
 input ProgrammerInput {
+  """
+  이름
+  """
   name: String!
+
+  """
+  성별 (MALE, FEMALE, ETC 중 하나)
+  """
   gender: Gender!
   grades: [Float!]!
   addressLocation: String!
@@ -67,6 +81,9 @@ input ProgrammerInput {
 ###
 
 type Mutation {
+  """
+  프로그래머 추가
+  """
   addProgrammer(input: ProgrammerInput!): Programmer
 }
 
