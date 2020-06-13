@@ -1,0 +1,141 @@
+{
+  "programmers": [
+    {
+      "id": 1,
+      "name": "김정빈",
+      "gender": "MALE",
+      "address": {
+        "location": "서울 동작",
+        "detail": "정빈 하우스"
+      },
+      "grades": [4.3, 4.4, 4.5],
+      "category": {
+        "frameworks": ["Vue.js", "React"],
+        "native": false
+      },
+      "friendship_ids": [1, 2, 3, 4]
+    },
+    {
+      "id": 2,
+      "name": "유인근",
+      "gender": "MALE",
+      "address": {
+        "location": "서울 동작",
+        "detail": "쿨피스 하우스"
+      },
+      "grades": [4.3, 4.4, 4.5],
+      "category": {
+        "frameworks": ["Django", "Spring"],
+        "database": ["All DB"]
+      },
+      "friendship_ids": [1, 5, 6, 7]
+    },
+    {
+      "id": 3,
+      "name": "이정원",
+      "gender": "MALE",
+      "address": {
+        "location": "서울 용산",
+        "detail": "한국 마사회 장학관"
+      },
+      "grades": [4.3, 4.4, 4.5],
+      "category": {
+        "frameworks": ["Django", "Spring"],
+        "database": ["MySql"]
+      },
+      "friendship_ids": [2, 5, 8, 9]
+    },
+    {
+      "id": 4,
+      "name": "장해민",
+      "gender": "MALE",
+      "address": {
+        "location": "서울 목동",
+        "detail": "해민이네집"
+      },
+      "grades": [4.3, 4.4, 4.5],
+      "category": {
+        "frameworks": ["Everything"],
+        "native": true
+      },
+      "friendship_ids": [3, 6, 8, 10]
+    },
+    {
+      "id": 5,
+      "name": "최범수",
+      "gender": "MALE",
+      "address": {
+        "location": "서울 용산",
+        "detail": "한국 마사회 장학관"
+      },
+      "grades": [4.3, 4.4, 4.5],
+      "category": {
+        "frameworks": ["Vue.js", "React"],
+        "native": false
+      },
+      "friendship_ids": [4, 7, 9, 10]
+    }
+  ],
+  "friendships": [
+    {
+      "id": 1,
+      "friend_a": 1,
+      "friend_b": 2,
+      "metYear": 2015
+    },
+    {
+      "id": 2,
+      "friend_a": 1,
+      "friend_b": 3,
+      "metYear": 2019
+    },
+    {
+      "id": 3,
+      "friend_a": 1,
+      "friend_b": 4,
+      "metYear": 2019
+    },
+    {
+      "id": 4,
+      "friend_a": 1,
+      "friend_b": 5,
+      "metYear": 2019
+    },
+    {
+      "id": 5,
+      "friend_a": 2,
+      "friend_b": 3,
+      "metYear": 2015
+    },
+    {
+      "id": 6,
+      "friend_a": 2,
+      "friend_b": 4,
+      "metYear": 2020
+    },
+    {
+      "id": 7,
+      "friend_a": 2,
+      "friend_b": 5,
+      "metYear": 2015
+    },
+    {
+      "id": 8,
+      "friend_a": 3,
+      "friend_b": 4,
+      "metYear": 2019
+    },
+    {
+      "id": 9,
+      "friend_a": 3,
+      "friend_b": 5,
+      "metYear": 2020
+    },
+    {
+      "id": 10,
+      "friend_a": 4,
+      "friend_b": 5,
+      "metYear": 2020
+    }
+  ]
+}
