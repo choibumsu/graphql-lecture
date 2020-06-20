@@ -3,16 +3,6 @@ import { ApolloProvider, useSubscription } from "@apollo/react-hooks";
 import client from "./apolloClient";
 import gql from "graphql-tag";
 
-const LOAD_PROGRAMMERS = gql`
-  query {
-    programmers {
-      id
-      name
-      gender
-    }
-  }
-`;
-
 const LOADED_SUBSCRIPTION = gql`
   subscription {
     programmerLoaded {
